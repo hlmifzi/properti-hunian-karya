@@ -2,10 +2,12 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Home, Bed, Bath, Car } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const propertyTypes = [
   {
     name: "Ekonomis",
+    slug: "ekonomis",
     size: "30/60",
     image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80",
     price: "Mulai 400 Juta",
@@ -13,6 +15,7 @@ const propertyTypes = [
   },
   {
     name: "Harmony",
+    slug: "harmony",
     size: "36/72",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
     price: "Mulai 550 Juta",
@@ -20,6 +23,7 @@ const propertyTypes = [
   },
   {
     name: "Premium",
+    slug: "premium",
     size: "60/72",
     image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
     price: "Mulai 750 Juta",
@@ -27,6 +31,7 @@ const propertyTypes = [
   },
   {
     name: "Luxury",
+    slug: "luxury",
     size: "72/84",
     image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80",
     price: "Mulai 1.2 Miliar",
@@ -35,6 +40,8 @@ const propertyTypes = [
 ];
 
 export const PropertyTypes = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
@@ -102,7 +109,10 @@ export const PropertyTypes = () => {
                 </CardContent>
 
                 <CardFooter>
-                  <Button className="w-full bg-gold hover:bg-gold/90 text-white transition-all duration-300 hover:shadow-gold-glow">
+                  <Button 
+                    className="w-full bg-gold hover:bg-gold/90 text-white transition-all duration-300 hover:shadow-gold-glow"
+                    onClick={() => navigate(`/property/${property.slug}`)}
+                  >
                     Lihat Detail
                   </Button>
                 </CardFooter>
