@@ -346,6 +346,43 @@ export default function PropertyDetail() {
                 </Card>
               </motion.div>
 
+              {/* Bonus Section */}
+              {property.bonus && property.bonus.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35 }}
+                >
+                  <Card className="bg-gradient-to-br from-gold/10 to-gold/5 border-gold/30 shadow-gold-glow">
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="bg-gold p-3 rounded-xl shadow-lg">
+                          <CheckCircle2 className="w-7 h-7 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-bold text-foreground">BONUS SPESIAL</h3>
+                          <p className="text-sm text-muted-foreground">Gratis untuk pembelian tipe ini</p>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {property.bonus.map((item: string, idx: number) => (
+                          <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.4 + idx * 0.05 }}
+                            className="flex items-center gap-3 p-4 rounded-xl bg-white dark:bg-dark-luxury border-2 border-gold/30 hover:border-gold hover:shadow-gold-glow transition-all"
+                          >
+                            <CheckCircle2 className="w-5 h-5 text-gold flex-shrink-0" />
+                            <span className="text-foreground font-semibold text-sm">{item}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              )}
+
               {/* Features */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -381,37 +418,6 @@ export default function PropertyDetail() {
                   </CardContent>
                 </Card>
               </motion.div>
-
-              {/* Bonus Section */}
-              {property.bonus && property.bonus.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                >
-                  <Card className="bg-gradient-to-br from-gold/10 to-gold/5 border-gold/30">
-                    <CardContent className="p-6">
-                      <div className="flex items-center gap-2 mb-4">
-                        <div className="bg-gold/20 p-2 rounded-lg">
-                          <CheckCircle2 className="w-6 h-6 text-gold" />
-                        </div>
-                        <h3 className="text-xl font-semibold text-foreground">BONUS Spesial</h3>
-                      </div>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                        {property.bonus.map((item: string, idx: number) => (
-                          <div
-                            key={idx}
-                            className="flex items-center gap-2 p-3 rounded-lg bg-gold/10 border border-gold/20 hover:bg-gold/20 transition-colors"
-                          >
-                            <CheckCircle2 className="w-4 h-4 text-gold flex-shrink-0" />
-                            <span className="text-foreground font-medium text-sm">{item}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              )}
             </div>
 
             {/* Sidebar CTA */}
