@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield } from "lucide-react";
+import { ArrowRight, Shield, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const bannerMessages = [
@@ -63,6 +63,16 @@ export const Hero = () => {
   const scrollToPropertyTypes = () => {
     const element = document.getElementById('property-types');
     element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const nextSlide = () => {
+    setCurrentContent((prev) => (prev + 1) % heroContent.length);
+    setCurrentImage((prev) => (prev + 1) % heroImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentContent((prev) => (prev - 1 + heroContent.length) % heroContent.length);
+    setCurrentImage((prev) => (prev - 1 + heroImages.length) % heroImages.length);
   };
 
   return (
@@ -148,13 +158,51 @@ export const Hero = () => {
           </Button>
           <Button
             size="lg"
-            variant="outline"
-            className="border-2 border-gold text-white hover:bg-gold hover:text-white px-8 py-6 text-lg transition-all duration-300 hover:scale-105"
+            className="bg-gold hover:bg-gold/90 text-white px-8 py-6 text-lg shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-300 hover:scale-105"
             onClick={() => window.open("https://wa.me/6281234567890", "_blank")}
           >
             Hubungi via WhatsApp
           </Button>
         </motion.div>
+
+        {/* Navigation Arrows */}
+        <div className="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 z-20">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-12 w-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-gold hover:border-gold transition-all duration-300"
+            onClick={prevSlide}
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </Button>
+        </div>
+        
+        <div className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 z-20">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-12 w-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-gold hover:border-gold transition-all duration-300"
+            onClick={nextSlide}
+          >
+            <ChevronRight className="h-6 w-6" />
+          </Button>
+        </div>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
+          {heroContent.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setCurrentContent(index);
+                setCurrentImage(index);
+              }}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                currentContent === index ? 'w-8 bg-gold' : 'w-2 bg-white/50 hover:bg-white/80'
+              }`}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Scroll Indicator */}
