@@ -146,23 +146,42 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          className="flex flex-col items-center gap-6"
         >
-          <Button
-            size="lg"
-            className="bg-gold hover:bg-gold/90 text-white px-8 py-6 text-lg shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-300 hover:scale-105"
-            onClick={scrollToPropertyTypes}
-          >
-            Lihat Tipe Rumah
-            <ArrowRight className="ml-2" />
-          </Button>
-          <Button
-            size="lg"
-            className="bg-gold hover:bg-gold/90 text-white px-8 py-6 text-lg shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-300 hover:scale-105"
-            onClick={() => window.open("https://wa.me/6281234567890", "_blank")}
-          >
-            Hubungi via WhatsApp
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button
+              size="lg"
+              variant="secondary"
+              className="bg-white hover:bg-white/90 text-gold border-2 border-gold px-8 py-6 text-lg shadow-lg transition-all duration-300 hover:scale-105"
+              onClick={scrollToPropertyTypes}
+            >
+              Lihat Tipe Rumah
+              <ArrowRight className="ml-2 text-gold" />
+            </Button>
+            <Button
+              size="lg"
+              className="bg-gold hover:bg-gold/90 text-white px-8 py-6 text-lg shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-300 hover:scale-105"
+              onClick={() => window.open("https://wa.me/6281234567890", "_blank")}
+            >
+              Hubungi via WhatsApp
+            </Button>
+          </div>
+
+          {/* Slide Indicators */}
+          <div className="flex gap-2 mt-2">
+            {heroContent.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setCurrentContent(index);
+                  setCurrentImage(index);
+                }}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  currentContent === index ? 'w-8 bg-gold' : 'w-2 bg-white/50 hover:bg-white/80'
+                }`}
+              />
+            ))}
+          </div>
         </motion.div>
 
         {/* Navigation Arrows */}
@@ -186,22 +205,6 @@ export const Hero = () => {
           >
             <ChevronRight className="h-6 w-6" />
           </Button>
-        </div>
-
-        {/* Slide Indicators */}
-        <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
-          {heroContent.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setCurrentContent(index);
-                setCurrentImage(index);
-              }}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                currentContent === index ? 'w-8 bg-gold' : 'w-2 bg-white/50 hover:bg-white/80'
-              }`}
-            />
-          ))}
         </div>
       </div>
 
