@@ -10,14 +10,29 @@ const bannerMessages = [
   "💰 Proses KPR Mudah & Cepat",
 ];
 
+const heroImages = [
+  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=80",
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80",
+  "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=2000&q=80",
+  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=80",
+];
+
 export const Hero = () => {
   const [currentBanner, setCurrentBanner] = useState(0);
+  const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const bannerInterval = setInterval(() => {
       setCurrentBanner((prev) => (prev + 1) % bannerMessages.length);
     }, 4000);
-    return () => clearInterval(interval);
+    return () => clearInterval(bannerInterval);
+  }, []);
+
+  useEffect(() => {
+    const imageInterval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(imageInterval);
   }, []);
 
   const scrollToPropertyTypes = () => {
@@ -27,13 +42,26 @@ export const Hero = () => {
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
+      {/* Background Image Slider with Overlay */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=80"
-          alt="Modern Luxury House"
-          className="w-full h-full object-cover"
-        />
+        {heroImages.map((image, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: currentImage === index ? 1 : 0,
+              scale: currentImage === index ? 1 : 1.1
+            }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <img
+              src={image}
+              alt={`Luxury House ${index + 1}`}
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+        ))}
         <div className="absolute inset-0 bg-gradient-to-b from-dark-luxury/70 via-dark-luxury/50 to-dark-luxury/90" />
       </div>
 
