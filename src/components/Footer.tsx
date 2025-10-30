@@ -3,7 +3,7 @@ import { Home, Mail, Phone, MapPin, Instagram, Music } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer className="bg-dark-luxury text-white pt-16 pb-8">
+    <footer id="footer" className="bg-dark-luxury text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
@@ -13,9 +13,12 @@ export const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="flex items-center gap-2 mb-4">
-              <Home className="w-8 h-8 text-gold" />
-              <span className="text-2xl font-bold">Premium<span className="text-gold">Homes</span></span>
+            <div className="flex items-center gap-3 mb-4">
+              <img src="/Persada.png" alt="Persada Residence" className="h-10 w-auto" />
+              <div className="leading-tight">
+                <span className="text-2xl font-bold">PERSADA <span className="text-gold">RESIDENCE</span></span>
+                <div className="text-gold text-sm">DRAMAGA - BOGOR</div>
+              </div>
             </div>
             <p className="text-gray-400 mb-4">
               Cluster eksklusif dengan desain modern dan lokasi strategis di Bogor
@@ -74,7 +77,7 @@ export const Footer = () => {
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-5 h-5 text-gold" />
-                <span className="text-gray-400">+62 812-3456-7890</span>
+                <span className="text-gray-400">62 896-4993-1253</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-5 h-5 text-gold" />
@@ -100,6 +103,23 @@ export const Footer = () => {
           </motion.div>
         </div>
 
+        {/* Developer Credit */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="glass-dark rounded-lg p-4 md:p-6 mb-6 flex flex-col md:flex-row items-center justify-between gap-4"
+        >
+          <div className="flex items-center gap-3">
+            <img src="/sugisena-inti-persada.png" alt="Sugisena Inti Persada" className="h-8 w-auto" />
+            <div className="text-sm md:text-base">
+              <span className="text-gray-200">Developer</span> <span className="text-white font-semibold">PT Sugisena Inti Persada</span>
+            </div>
+          </div>
+          <a href="#top" className="text-gray-300 hover:text-gold transition-colors">Kembali ke atas</a>
+        </motion.div>
+
         {/* Copyright */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -108,7 +128,7 @@ export const Footer = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="border-t border-gray-800 pt-8 text-center text-gray-400"
         >
-          <p>&copy; 2025 PremiumHomes. All rights reserved. Designed with ❤️ for your dream home.</p>
+          <p>&copy; 2025 Persada Residence. All rights reserved.</p>
         </motion.div>
       </div>
     </footer>

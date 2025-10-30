@@ -38,7 +38,7 @@ export const FinalCTA = () => {
               size="lg"
               variant="secondary"
               className="bg-white hover:bg-white/90 text-gold border-2 border-gold px-10 py-7 text-xl font-semibold shadow-2xl hover:scale-110 transition-all duration-300"
-              onClick={() => window.open("https://wa.me/6281234567890", "_blank")}
+              onClick={() => window.open("https://wa.me/6289649931253", "_blank")}
             >
               <MessageCircle className="mr-2" />
               Hubungi Kami

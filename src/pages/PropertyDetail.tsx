@@ -21,8 +21,34 @@ import {
   MessageCircle
 } from "lucide-react";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import type { LucideIcon } from "lucide-react";
 
-const propertyData: Record<string, any> = {
+type Feature = { icon: LucideIcon; label: string };
+type Specs = {
+  bedrooms: number;
+  bathrooms: number;
+  carport: number;
+  landSize: string;
+  buildingSize: string;
+  floors: number;
+  electricity: string;
+  waterSource: string;
+};
+type PropertyEntry = {
+  name: string;
+  size: string;
+  price: string;
+  priceDetail: string;
+  image: string;
+  images: string[];
+  specs: Specs;
+  features: Feature[];
+  bonus: string[];
+  description: string;
+  location: string;
+};
+
+const propertyData: Record<string, PropertyEntry> = {
   ekonomis: {
     name: "Ekonomis",
     size: "30/60",
@@ -393,7 +419,7 @@ export default function PropertyDetail() {
                   <CardContent className="p-6">
                     <h3 className="text-xl font-semibold text-foreground mb-4">Fasilitas & Kelengkapan</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {property.features.map((feature: any, idx: number) => (
+                      {property.features.map((feature: Feature, idx: number) => (
                         <div key={idx} className="flex items-center gap-3 p-3 rounded-lg bg-background/50 hover:bg-gold/10 transition-colors">
                           <feature.icon className="w-5 h-5 text-gold flex-shrink-0" />
                           <span className="text-foreground">{feature.label}</span>
@@ -438,7 +464,7 @@ export default function PropertyDetail() {
                     <div className="space-y-3">
                       <Button
                         className="w-full bg-gold hover:bg-gold/90 text-white h-12 text-lg shadow-gold-glow hover:shadow-gold-glow-lg transition-all"
-                        onClick={() => window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(whatsappMessage)}`, '_blank')}
+                        onClick={() => window.open(`https://wa.me/6289649931253?text=${encodeURIComponent(whatsappMessage)}`, '_blank')}
                       >
                         <MessageCircle className="mr-2 h-5 w-5" />
                         Hubungi Kami

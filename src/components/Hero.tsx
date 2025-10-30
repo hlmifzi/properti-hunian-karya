@@ -100,30 +100,8 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-dark-luxury/70 via-dark-luxury/50 to-dark-luxury/90" />
       </div>
 
-      {/* Auto-sliding Banner */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="absolute top-0 left-0 right-0 z-20 bg-gold py-3 overflow-hidden"
-      >
-        <div className="container mx-auto px-4">
-          <motion.div
-            key={currentBanner}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.5 }}
-            className="text-center text-dark-luxury font-semibold text-sm md:text-base flex items-center justify-center gap-2"
-          >
-            <Shield className="w-4 h-4" />
-            {bannerMessages[currentBanner]}
-          </motion.div>
-        </div>
-      </motion.div>
-
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center">
+      <div className="relative z-10 container mx-auto mt-24 h-full px-4 text-center flex flex-col items-center justify-center">
         <motion.div
           key={currentContent}
           initial={{ opacity: 0, y: 30 }}
@@ -131,15 +109,17 @@ export const Hero = () => {
           exit={{ opacity: 0, y: -30 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            {heroContent[currentContent].title}
-            <br />
-            <span className="text-gold">{heroContent[currentContent].highlight}</span>
-          </h1>
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 leading-tight">
+              {heroContent[currentContent].title}
+              <br />
+              <span className="text-gold">{heroContent[currentContent].highlight}</span>
+            </h1>
 
-          <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto">
-            {heroContent[currentContent].description}
-          </p>
+            <p className="text-xl md:text-2xl text-gray-200 mb-4">
+              {heroContent[currentContent].description}
+            </p>
+          </div>
         </motion.div>
 
         <motion.div
@@ -161,7 +141,7 @@ export const Hero = () => {
             <Button
               size="lg"
               className="bg-gold hover:bg-gold/90 text-white px-8 py-6 text-lg shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-300 hover:scale-105"
-              onClick={() => window.open("https://wa.me/6281234567890", "_blank")}
+              onClick={() => window.open("https://wa.me/6289649931253", "_blank")}
             >
               Hubungi via WhatsApp
             </Button>
@@ -170,7 +150,7 @@ export const Hero = () => {
           {/* Slide Indicators */}
           <div className="flex gap-2 mt-2">
             {heroContent.map((_, index) => (
-              <button
+              <motion.button
                 key={index}
                 onClick={() => {
                   setCurrentContent(index);
@@ -179,6 +159,12 @@ export const Hero = () => {
                 className={`h-2 rounded-full transition-all duration-300 ${
                   currentContent === index ? 'w-8 bg-gold' : 'w-2 bg-white/50 hover:bg-white/80'
                 }`}
+                animate={
+                  currentContent === index
+                    ? { scale: [1, 1.2, 1], opacity: [1, 0.8, 1] }
+                    : { scale: 1, opacity: 0.7 }
+                }
+                transition={{ duration: 1.2, repeat: currentContent === index ? Infinity : 0 }}
               />
             ))}
           </div>
@@ -215,13 +201,6 @@ export const Hero = () => {
         transition={{ duration: 1, delay: 1 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-gold rounded-full flex items-start justify-center p-2"
-        >
-          <motion.div className="w-1 h-3 bg-gold rounded-full" />
-        </motion.div>
       </motion.div>
     </section>
   );

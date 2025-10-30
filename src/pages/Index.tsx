@@ -7,18 +7,27 @@ import { Location } from "@/components/Location";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { InfoBar } from "@/components/InfoBar";
+import { Navbar } from "@/components/Navbar";
+// PromoBar diintegrasikan ke InfoBar
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <Hero />
-      <Features />
-      <PropertyTypes />
-      <Gallery />
-      <Testimonials />
-      <Location />
-      <FinalCTA />
-      <Footer />
+    <div id="top" className="min-h-screen">
+      <InfoBar />
+      <Navbar />
+      <div className="pt-0">
+        <div className="-mt-16">
+          <Hero />
+        </div>
+        <Features />
+        <PropertyTypes />
+        <Gallery />
+        <Testimonials />
+        <Location />
+        <FinalCTA />
+        <Footer />
+      </div>
       <FloatingWhatsApp />
     </div>
   );

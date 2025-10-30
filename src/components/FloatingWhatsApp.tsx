@@ -6,7 +6,7 @@ export const FloatingWhatsApp = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleWhatsAppClick = () => {
-    window.open("https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20properti%20dari%20website", "_blank");
+    window.open("https://wa.me/6289649931253?text=Halo,%20saya%20tertarik%20dengan%20properti%20dari%20website", "_blank");
   };
 
   return (

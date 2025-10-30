@@ -111,3 +111,19 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Glass UI utilities */
+@layer components {
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-lg;
+  }
+  .glass-dark {
+    @apply bg-dark-luxury/40 backdrop-blur-md border border-white/10 shadow-xl;
+  }
+  .glass-card {
+    @apply rounded-xl p-4 md:p-6 glass;
+  }
+  .glass-nav {
+    @apply glass-dark;
+  }
+}
