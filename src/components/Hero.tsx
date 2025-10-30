@@ -1,8 +1,30 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Shield } from "lucide-react";
+import { useEffect, useState } from "react";
+
+const bannerMessages = [
+  "🏆 Cluster Eksklusif Dekat IPB Dramaga",
+  "✅ Legalitas Aman - Sudah Sertifikat Hak Milik (SHM)",
+  "🎁 Bonus Kanopi, AC, Kitchen Set & Banyak Lagi",
+  "💰 Proses KPR Mudah & Cepat",
+];
 
 export const Hero = () => {
+  const [currentBanner, setCurrentBanner] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBanner((prev) => (prev + 1) % bannerMessages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const scrollToPropertyTypes = () => {
+    const element = document.getElementById('property-types');
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -14,6 +36,28 @@ export const Hero = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-dark-luxury/70 via-dark-luxury/50 to-dark-luxury/90" />
       </div>
+
+      {/* Auto-sliding Banner */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="absolute top-0 left-0 right-0 z-20 bg-gold py-3 overflow-hidden"
+      >
+        <div className="container mx-auto px-4">
+          <motion.div
+            key={currentBanner}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.5 }}
+            className="text-center text-dark-luxury font-semibold text-sm md:text-base flex items-center justify-center gap-2"
+          >
+            <Shield className="w-4 h-4" />
+            {bannerMessages[currentBanner]}
+          </motion.div>
+        </div>
+      </motion.div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
@@ -46,6 +90,7 @@ export const Hero = () => {
           <Button
             size="lg"
             className="bg-gold hover:bg-gold/90 text-white px-8 py-6 text-lg shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-300 hover:scale-105"
+            onClick={scrollToPropertyTypes}
           >
             Lihat Tipe Rumah
             <ArrowRight className="ml-2" />

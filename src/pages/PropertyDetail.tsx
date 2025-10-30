@@ -54,6 +54,12 @@ const propertyData: Record<string, any> = {
       { icon: Trees, label: "Taman Depan" },
       { icon: Home, label: "Carport 1 Mobil" },
     ],
+    bonus: [
+      "Kanopi",
+      "Toren Air",
+      "Mesin Air",
+      "AC 1 Unit",
+    ],
     description: "Rumah tipe Ekonomis dirancang untuk keluarga muda yang menginginkan hunian modern dengan harga terjangkau. Dilengkapi dengan fasilitas lengkap dan lokasi strategis dekat IPB Dramaga.",
     location: "Cluster Bogor Valley, 5 menit dari IPB Dramaga",
   },
@@ -87,6 +93,12 @@ const propertyData: Record<string, any> = {
       { icon: Wind, label: "AC Pre-Installed 1 Unit" },
       { icon: Trees, label: "Taman & Carport Luas" },
       { icon: Home, label: "Kitchen Set Standard" },
+    ],
+    bonus: [
+      "Kanopi",
+      "Toren Air",
+      "Mesin Air",
+      "AC 1 Unit",
     ],
     description: "Tipe Harmony menawarkan keseimbangan sempurna antara kenyamanan dan nilai investasi. Dengan 2 kamar tidur dan 2 kamar mandi, cocok untuk keluarga kecil yang menginginkan privasi lebih.",
     location: "Cluster Bogor Valley, 5 menit dari IPB Dramaga",
@@ -122,6 +134,13 @@ const propertyData: Record<string, any> = {
       { icon: Trees, label: "Taman & Gazebo" },
       { icon: Home, label: "Kitchen Set Premium + Canopy" },
     ],
+    bonus: [
+      "Kitchen Set Premium",
+      "Kanopi",
+      "Toren Air",
+      "Mesin Air",
+      "AC 2 Unit",
+    ],
     description: "Rumah Premium 2 lantai dengan desain modern minimalis. Dilengkapi dengan 3 kamar tidur dan 2 kamar mandi, ideal untuk keluarga berkembang yang menginginkan ruang lebih luas dan fasilitas premium.",
     location: "Cluster Bogor Valley, 5 menit dari IPB Dramaga",
   },
@@ -155,6 +174,13 @@ const propertyData: Record<string, any> = {
       { icon: Wind, label: "AC Pre-Installed 3 Unit" },
       { icon: Trees, label: "Taman Luas & Kolam" },
       { icon: Home, label: "Full Furnished + Canopy Premium" },
+    ],
+    bonus: [
+      "Kitchen Set Premium",
+      "Kanopi Premium",
+      "Toren Air",
+      "Mesin Air",
+      "AC 3 Unit",
     ],
     description: "Tipe Luxury merupakan puncak kemewahan di cluster kami. Dengan 4 kamar tidur, 3 kamar mandi, dan smart home system, rumah ini dirancang untuk keluarga yang menginginkan kenyamanan maksimal dan gaya hidup premium.",
     location: "Cluster Bogor Valley, 5 menit dari IPB Dramaga",
@@ -355,6 +381,37 @@ export default function PropertyDetail() {
                   </CardContent>
                 </Card>
               </motion.div>
+
+              {/* Bonus Section */}
+              {property.bonus && property.bonus.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  <Card className="bg-gradient-to-br from-gold/10 to-gold/5 border-gold/30">
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-2 mb-4">
+                        <div className="bg-gold/20 p-2 rounded-lg">
+                          <CheckCircle2 className="w-6 h-6 text-gold" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-foreground">BONUS Spesial</h3>
+                      </div>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        {property.bonus.map((item: string, idx: number) => (
+                          <div
+                            key={idx}
+                            className="flex items-center gap-2 p-3 rounded-lg bg-gold/10 border border-gold/20 hover:bg-gold/20 transition-colors"
+                          >
+                            <CheckCircle2 className="w-4 h-4 text-gold flex-shrink-0" />
+                            <span className="text-foreground font-medium text-sm">{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              )}
             </div>
 
             {/* Sidebar CTA */}
