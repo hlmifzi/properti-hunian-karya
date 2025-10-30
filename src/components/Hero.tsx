@@ -17,9 +17,33 @@ const heroImages = [
   "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=80",
 ];
 
+const heroContent = [
+  {
+    title: "Temukan Hunian Modern",
+    highlight: "dengan Sentuhan Elegan",
+    description: "Cluster eksklusif di Bogor dekat IPB Dramaga — desain mewah, lingkungan asri, dan investasi masa depan."
+  },
+  {
+    title: "Investasi Fleksibel",
+    highlight: "Cocok untuk Kostan & Rumah Hari Tua",
+    description: "Properti serbaguna dengan ROI tinggi — ideal untuk passive income atau hunian jangka panjang yang nyaman."
+  },
+  {
+    title: "Lokasi Strategis Premium",
+    highlight: "Dekat IPB & Tol Jagorawi",
+    description: "Lingkungan asri dan tenang, namun tetap mudah diakses — hanya beberapa menit ke kampus dan tol."
+  },
+  {
+    title: "Desain Modern Minimalis",
+    highlight: "Plus Banyak Bonus Menarik",
+    description: "Rumah cantik dengan desain contemporary — bonus kanopi, AC, kitchen set, dan masih banyak lagi!"
+  }
+];
+
 export const Hero = () => {
   const [currentBanner, setCurrentBanner] = useState(0);
   const [currentImage, setCurrentImage] = useState(0);
+  const [currentContent, setCurrentContent] = useState(0);
 
   useEffect(() => {
     const bannerInterval = setInterval(() => {
@@ -29,10 +53,11 @@ export const Hero = () => {
   }, []);
 
   useEffect(() => {
-    const imageInterval = setInterval(() => {
+    const contentInterval = setInterval(() => {
+      setCurrentContent((prev) => (prev + 1) % heroContent.length);
       setCurrentImage((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-    return () => clearInterval(imageInterval);
+    }, 6000);
+    return () => clearInterval(contentInterval);
   }, []);
 
   const scrollToPropertyTypes = () => {
@@ -89,25 +114,23 @@ export const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
-        <motion.h1
+        <motion.div
+          key={currentContent}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
+          exit={{ opacity: 0, y: -30 }}
+          transition={{ duration: 0.8 }}
         >
-          Temukan Hunian Modern
-          <br />
-          <span className="text-gold">dengan Sentuhan Elegan</span>
-        </motion.h1>
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            {heroContent[currentContent].title}
+            <br />
+            <span className="text-gold">{heroContent[currentContent].highlight}</span>
+          </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto"
-        >
-          Cluster eksklusif di Bogor dekat IPB Dramaga — desain mewah, lingkungan asri, dan investasi masa depan.
-        </motion.p>
+          <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto">
+            {heroContent[currentContent].description}
+          </p>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
