@@ -41,6 +41,7 @@ export const FacilitiesAccess = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Fasum */}
           <motion.div
+            id="fasum"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -76,6 +77,7 @@ export const FacilitiesAccess = () => {
 
           {/* Akses */}
           <motion.div
+            id="akses"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}

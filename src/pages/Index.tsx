@@ -13,6 +13,7 @@ import { SoldStats } from "@/components/SoldStats";
 import { PremiumBrands } from "@/components/PremiumBrands";
 import { SupportKPR } from "@/components/SupportKPR";
 import { FacilitiesAccess } from "@/components/FacilitiesAccess";
+import { FAQAccordion } from "@/components/FAQAccordion";
 // PromoBar diintegrasikan ke InfoBar
 
 const Index = () => {
@@ -25,14 +26,15 @@ const Index = () => {
           <Hero />
         </div>
         <PropertyTypes />
-        <Features />
         <SoldStats />
+        <Features />
         <Gallery />
         <FacilitiesAccess />
         <PremiumBrands />
         <Testimonials />
         <Location />
         <SupportKPR />
+        <FAQAccordion />
         <FinalCTA />
         <Footer />
       </div>

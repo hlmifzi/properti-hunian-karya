@@ -12,7 +12,7 @@ export const SoldStats = () => {
   const totalUnits = items.reduce((acc, item) => acc + (item.count || 0), 0);
 
   return (
-    <section id="sold-stats" className="py-20 bg-gradient-to-b from-secondary/30 to-background">
+    <section id="sold-stats" className="py-20 bg-dark-luxury">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -21,7 +21,7 @@ export const SoldStats = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
             Laku Terjual
           </h2>
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gold/10 border border-gold/30">
