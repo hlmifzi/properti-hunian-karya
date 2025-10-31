@@ -211,6 +211,42 @@ const propertyData: Record<string, PropertyEntry> = {
     description: "Tipe Luxury merupakan puncak kemewahan di cluster kami. Dengan 4 kamar tidur, 3 kamar mandi, dan smart home system, rumah ini dirancang untuk keluarga yang menginginkan kenyamanan maksimal dan gaya hidup premium.",
     location: "Cluster Bogor Valley, 5 menit dari IPB Dramaga",
   },
+  "ruko-strategis": {
+    name: "Ruko Strategis",
+    size: "90/60",
+    price: "Mulai 950 Juta",
+    priceDetail: "Rp 950.000.000 - Rp 1.150.000.000",
+    image: "https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=1200&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1494565104710-9ca9b2c1d6d5?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1440421929891-131ea7e156ba?auto=format&fit=crop&w=800&q=80",
+    ],
+    specs: {
+      bedrooms: 1,
+      bathrooms: 1,
+      carport: 1,
+      landSize: "60 m²",
+      buildingSize: "90 m²",
+      floors: 2,
+      electricity: "3500 Watt",
+      waterSource: "PDAM + Toren 700L",
+    },
+    features: [
+      { icon: Shield, label: "SHM + IMB" },
+      { icon: Lock, label: "Rolling Door + CCTV" },
+      { icon: Droplets, label: "Toren 700 Liter" },
+      { icon: Zap, label: "Instalasi Listrik 3500W" },
+      { icon: Home, label: "Area Usaha + Hunian Atas" },
+    ],
+    bonus: [
+      "Kanopi Depan",
+      "Branding Signage",
+      "Kitchen Set Atas",
+    ],
+    description: "Ruko 2 lantai dengan lokasi strategis untuk usaha dan hunian. Cocok untuk bisnis ritel, kuliner, atau kantor kecil dengan akses mudah dan area parkir depan.",
+    location: "Koridor Komersial Dramaga, Bogor",
+  },
 };
 
 export default function PropertyDetail() {

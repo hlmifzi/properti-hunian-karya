@@ -9,6 +9,10 @@ import { Footer } from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { InfoBar } from "@/components/InfoBar";
 import { Navbar } from "@/components/Navbar";
+import { SoldStats } from "@/components/SoldStats";
+import { PremiumBrands } from "@/components/PremiumBrands";
+import { SupportKPR } from "@/components/SupportKPR";
+import { FacilitiesAccess } from "@/components/FacilitiesAccess";
 // PromoBar diintegrasikan ke InfoBar
 
 const Index = () => {
@@ -20,11 +24,15 @@ const Index = () => {
         <div className="-mt-16">
           <Hero />
         </div>
-        <Features />
         <PropertyTypes />
+        <Features />
+        <SoldStats />
         <Gallery />
+        <FacilitiesAccess />
+        <PremiumBrands />
         <Testimonials />
         <Location />
+        <SupportKPR />
         <FinalCTA />
         <Footer />
       </div>
