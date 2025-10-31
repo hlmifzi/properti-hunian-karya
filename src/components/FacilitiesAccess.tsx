@@ -4,18 +4,19 @@ import { Shield, Trees, Church, Droplets, Lightbulb, Hospital, UtensilsCrossed, 
 const fasum = [
   { label: "Keamanan 24 Jam", icon: Shield },
   { label: "Taman & Area Hijau", icon: Trees },
-  { label: "Musholla", icon: Church },
+  { label: "Masjid", icon: Church },
   { label: "Saluran Drainase Rapi", icon: Droplets },
   { label: "Jalan Paving & Penerangan", icon: Lightbulb },
+  { label: "Tidak Banjir", icon: Lightbulb },
 ];
 
 const akses = [
   { label: "Rumah sakit", icon: Hospital },
-  { label: "Jajanan seperti kota Jakarta", icon: UtensilsCrossed },
-  { label: "Wisata curug", icon: Waves },
+  { label: "Suasana Kota & Pedesaan", icon: UtensilsCrossed },
+  { label: "Dekat Wisata curug & pemancingan", icon: Waves },
   { label: "Pemandangan gunung", icon: Mountain },
-  { label: "Udara sejuk kabut", icon: Wind },
-  { label: "Pasar", icon: ShoppingCart },
+  { label: "Udara sejuk berkabut", icon: Wind },
+  { label: "Dekat dengan pasar", icon: ShoppingCart },
   { label: "Indomaret, laundry dll", icon: Store },
 ];
 

@@ -4,16 +4,12 @@ import { Button } from "@/components/ui/button";
 
 const navItems = [
   { label: "Beranda", href: "#top" },
-  { label: "Laku Terjual", href: "#sold-stats" },
-  { label: "Premium Brands", href: "#premium-brands" },
   { label: "Tipe Rumah", href: "#property-types" },
-  { label: "Support KPR", href: "#support-kpr" },
-  { label: "FAQ", href: "#faq" },
   { label: "Galeri", href: "#gallery" },
-  { label: "Fasum", href: "#fasum" },
   { label: "Akses", href: "#akses" },
   { label: "Lokasi", href: "#location" },
-  { label: "Kontak", href: "#footer" },
+  { label: "Support KPR", href: "#support-kpr" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export const Navbar = () => {
