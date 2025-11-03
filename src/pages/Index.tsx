@@ -15,6 +15,7 @@ import { SupportKPR } from "@/components/SupportKPR";
 import { FacilitiesAccess } from "@/components/FacilitiesAccess";
 import { KPRSimulator } from "@/components/KPRSimulator";
 import { FAQAccordion } from "@/components/FAQAccordion";
+import { ArticlesPreview } from "@/components/ArticlesPreview";
 // PromoBar diintegrasikan ke InfoBar
 
 const Index = () => {
@@ -61,6 +62,9 @@ const Index = () => {
         </div>
         <div className="bg-secondary/30">
           <FinalCTA />
+        </div>
+        <div className="bg-secondary/30">
+          <ArticlesPreview />
         </div>
         <Footer />
       </div>

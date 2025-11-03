@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
@@ -8,74 +8,41 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { motion } from "framer-motion";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getPosts, getFeaturedImage, getAuthorName, WPPost } from "@/lib/wp";
 import { useNavigate } from "react-router-dom";
 
-const articles = {
-  tips: [
-    {
-      id: 1,
-      title: "Tips Memilih Perumahan di Bogor yang Sejuk dan Strategis",
-      excerpt: "Panduan lengkap memilih lokasi perumahan bogor yang tepat untuk keluarga Anda.",
-      date: "15 Januari 2025",
-      author: "Tim Dramaga Cantik",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80",
-      slug: "tips-memilih-perumahan-bogor"
-    },
-    {
-      id: 2,
-      title: "Keuntungan Investasi Properti di Dramaga Bogor",
-      excerpt: "Mengapa cluster bogor di kawasan Dramaga menjadi pilihan investasi terbaik.",
-      date: "10 Januari 2025",
-      author: "Tim Dramaga Cantik",
-      image: "https://images.unsplash.com/photo-1560184897-ae75f418493e?auto=format&fit=crop&w=800&q=80",
-      slug: "investasi-properti-dramaga"
-    }
-  ],
-  kpr: [
-    {
-      id: 3,
-      title: "Panduan KPR untuk Rumah Harga 300 Jutaan",
-      excerpt: "Cara mudah mengajukan KPR untuk perumahan murah di bogor dengan cicilan terjangkau.",
-      date: "12 Januari 2025",
-      author: "Tim Dramaga Cantik",
-      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80",
-      slug: "panduan-kpr-300-juta"
-    },
-    {
-      id: 4,
-      title: "Cara Hitung Cicilan Rumah dengan Simulasi KPR",
-      excerpt: "Gunakan kalkulator KPR untuk merencanakan pembelian rumah impian Anda.",
-      date: "8 Januari 2025",
-      author: "Tim Dramaga Cantik",
-      image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80",
-      slug: "cara-hitung-cicilan-kpr"
-    }
-  ],
-  lifestyle: [
-    {
-      id: 5,
-      title: "Hunian Minimalis Modern untuk Keluarga Muda",
-      excerpt: "Desain rumah harga 300 juta minimalis yang fungsional dan estetik.",
-      date: "5 Januari 2025",
-      author: "Tim Dramaga Cantik",
-      image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80",
-      slug: "hunian-minimalis-modern"
-    },
-    {
-      id: 6,
-      title: "Fasilitas Lengkap di Perumahan Elit Bogor",
-      excerpt: "Nikmati lifestyle eksklusif di perumahan dramaga bogor dengan fasilitas premium.",
-      date: "2 Januari 2025",
-      author: "Tim Dramaga Cantik",
-      image: "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?auto=format&fit=crop&w=800&q=80",
-      slug: "fasilitas-perumahan-elit"
-    }
-  ]
-};
+// Data artikel kini diambil dari WordPress
+// Pastikan env `VITE_WP_URL` terpasang, misal: https://your-wp-site.com
 
 const Articles = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("tips");
+  const [posts, setPosts] = useState<WPPost[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    async function load() {
+      setLoading(true);
+      try {
+        const wp = await getPosts(10);
+        if (active) setPosts(wp);
+      } catch (e: unknown) {
+        const message =
+          e instanceof Error
+            ? e.message
+            : typeof e === "string"
+            ? e
+            : "Gagal memuat artikel";
+        if (active) setError(message);
+      } finally {
+        if (active) setLoading(false);
+      }
+    }
+    load();
+    return () => { active = false; };
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -106,19 +73,26 @@ const Articles = () => {
             </TabsList>
 
             <TabsContent value="tips" className="mt-0">
+              {loading && (
+                <div className="text-center text-muted-foreground">Memuat artikel…</div>
+              )}
+              {error && !loading && (
+                <div className="text-center text-red-600">{error}</div>
+              )}
               <div className="grid md:grid-cols-2 gap-8">
-                {articles.tips.map((article, idx) => (
+                {posts.map((post, idx) => (
                   <motion.div
-                    key={article.id}
+                    key={post.id}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
                   >
                     <Card className="overflow-hidden h-full hover:border-gold transition-all duration-300 group cursor-pointer">
-                      <div className="relative overflow-hidden">
+                      <div className="relative overflow-hidden" onClick={() => navigate(`/articles/${post.slug}`)}>
                         <img
-                          src={article.image}
-                          alt={article.title}
+                          src={getFeaturedImage(post) || 
+                            "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80"}
+                          alt={post.title.rendered.replace(/<[^>]+>/g, "")}
                           className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                       </div>
@@ -126,22 +100,22 @@ const Articles = () => {
                         <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
                           <div className="flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
-                            <span>{article.date}</span>
+                            <span>{new Date(post.date).toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" })}</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <User className="w-4 h-4" />
-                            <span>{article.author}</span>
+                            <span>{getAuthorName(post) || "Admin"}</span>
                           </div>
                         </div>
                         <CardTitle className="text-2xl group-hover:text-gold transition-colors">
-                          {article.title}
+                          <span dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
                         </CardTitle>
                         <CardDescription className="text-base">
-                          {article.excerpt}
+                          <span dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <Button variant="ghost" className="group/btn p-0 h-auto">
+                        <Button variant="ghost" className="group/btn p-0 h-auto" onClick={() => navigate(`/articles/${post.slug}`)}>
                           Baca Selengkapnya
                           <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
                         </Button>
@@ -154,9 +128,9 @@ const Articles = () => {
 
             <TabsContent value="kpr" className="mt-0">
               <div className="grid md:grid-cols-2 gap-8">
-                {articles.kpr.map((article, idx) => (
+                {posts.map((post, idx) => (
                   <motion.div
-                    key={article.id}
+                    key={post.id}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
@@ -164,8 +138,9 @@ const Articles = () => {
                     <Card className="overflow-hidden h-full hover:border-gold transition-all duration-300 group cursor-pointer">
                       <div className="relative overflow-hidden">
                         <img
-                          src={article.image}
-                          alt={article.title}
+                          src={getFeaturedImage(post) || 
+                            "https://images.unsplash.com/photo-1560184897-ae75f418493e?auto=format&fit=crop&w=800&q=80"}
+                          alt={post.title.rendered.replace(/<[^>]+>/g, "")}
                           className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                       </div>
@@ -173,22 +148,22 @@ const Articles = () => {
                         <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
                           <div className="flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
-                            <span>{article.date}</span>
+                            <span>{new Date(post.date).toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" })}</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <User className="w-4 h-4" />
-                            <span>{article.author}</span>
+                            <span>{getAuthorName(post) || "Admin"}</span>
                           </div>
                         </div>
                         <CardTitle className="text-2xl group-hover:text-gold transition-colors">
-                          {article.title}
+                          <span dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
                         </CardTitle>
                         <CardDescription className="text-base">
-                          {article.excerpt}
+                          <span dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <Button variant="ghost" className="group/btn p-0 h-auto">
+                        <Button variant="ghost" className="group/btn p-0 h-auto" onClick={() => navigate(`/articles/${post.slug}`)}>
                           Baca Selengkapnya
                           <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
                         </Button>
@@ -201,9 +176,9 @@ const Articles = () => {
 
             <TabsContent value="lifestyle" className="mt-0">
               <div className="grid md:grid-cols-2 gap-8">
-                {articles.lifestyle.map((article, idx) => (
+                {posts.map((post, idx) => (
                   <motion.div
-                    key={article.id}
+                    key={post.id}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
@@ -211,8 +186,9 @@ const Articles = () => {
                     <Card className="overflow-hidden h-full hover:border-gold transition-all duration-300 group cursor-pointer">
                       <div className="relative overflow-hidden">
                         <img
-                          src={article.image}
-                          alt={article.title}
+                          src={getFeaturedImage(post) || 
+                            "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?auto=format&fit=crop&w=800&q=80"}
+                          alt={post.title.rendered.replace(/<[^>]+>/g, "")}
                           className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                       </div>
@@ -220,22 +196,22 @@ const Articles = () => {
                         <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
                           <div className="flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
-                            <span>{article.date}</span>
+                            <span>{new Date(post.date).toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" })}</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <User className="w-4 h-4" />
-                            <span>{article.author}</span>
+                            <span>{getAuthorName(post) || "Admin"}</span>
                           </div>
                         </div>
                         <CardTitle className="text-2xl group-hover:text-gold transition-colors">
-                          {article.title}
+                          <span dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
                         </CardTitle>
                         <CardDescription className="text-base">
-                          {article.excerpt}
+                          <span dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <Button variant="ghost" className="group/btn p-0 h-auto">
+                        <Button variant="ghost" className="group/btn p-0 h-auto" onClick={() => navigate(`/articles/${post.slug}`)}>
                           Baca Selengkapnya
                           <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
                         </Button>

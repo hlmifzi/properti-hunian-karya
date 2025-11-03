@@ -3,13 +3,14 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  { label: "Beranda", href: "#top" },
+  { label: "Beranda", href: "/" },
   { label: "Tipe Rumah", href: "#property-types" },
   { label: "Galeri", href: "#gallery" },
   { label: "Akses", href: "#akses" },
   { label: "Lokasi", href: "#location" },
   { label: "Support KPR", href: "#support-kpr" },
   { label: "FAQ", href: "#faq" },
+  { label: "Artikel", href: "/articles" },
 ];
 
 export const Navbar = () => {
