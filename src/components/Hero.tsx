@@ -19,24 +19,24 @@ const heroImages = [
 
 const heroContent = [
   {
-    title: "Temukan Hunian Modern",
-    highlight: "dengan Sentuhan Elegan",
-    description: "Cluster eksklusif di Bogor dekat IPB Dramaga — desain mewah, lingkungan asri, dan investasi masa depan."
+    title: "Perumahan Bogor Terbaik",
+    highlight: "Dramaga Cantik Residence",
+    description: "Perumahan dramaga bogor dekat IPB Dramaga — cluster bogor eksklusif dengan desain mewah, lingkungan asri, dan investasi masa depan yang menguntungkan."
   },
   {
-    title: "Investasi Fleksibel",
-    highlight: "Cocok untuk Kostan & Rumah Hari Tua",
-    description: "Properti serbaguna dengan ROI tinggi — ideal untuk passive income atau hunian jangka panjang yang nyaman."
+    title: "Rumah Harga 300 Jutaan",
+    highlight: "Perumahan Murah di Bogor",
+    description: "Rumah harga 300 juta minimalis dengan ROI tinggi — perumahan di bogor yang terjangkau, cocok untuk kosan atau hunian jangka panjang yang nyaman."
   },
   {
-    title: "Lokasi Strategis Premium",
+    title: "Perumahan di Bogor yang Sejuk",
     highlight: "Dekat IPB & Tol Jagorawi",
-    description: "Lingkungan asri dan tenang, namun tetap mudah diakses — hanya beberapa menit ke kampus dan tol."
+    description: "Perumahan dekat IPB dramaga dengan lingkungan asri dan tenang — cluster bogor strategis, hanya beberapa menit ke kampus dan akses tol mudah."
   },
   {
-    title: "Desain Modern Minimalis",
+    title: "Perumahan Elit di Bogor",
     highlight: "Plus Banyak Bonus Menarik",
-    description: "Rumah cantik dengan desain contemporary — bonus kanopi, AC, kitchen set, dan masih banyak lagi!"
+    description: "Perumahan di bogor dengan desain modern minimalis — dramaga cantik residence bogor menawarkan bonus kanopi, AC, kitchen set, dan masih banyak lagi!"
   }
 ];
 
