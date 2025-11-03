@@ -72,85 +72,85 @@ export const PropertyTypes = () => {
           </p>
         </motion.div>
 
-        <div className="relative">
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            plugins={[
-              Autoplay({
-                delay: 4000,
-              }),
-            ]}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-4">
-              {propertyTypes.map((property, idx) => (
-                <CarouselItem key={idx} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    <Card className="overflow-hidden h-full border-border hover:border-gold hover:shadow-gold-glow transition-all duration-300 group">
-                      <div className="relative overflow-hidden">
-                        <img
-                          src={property.image}
-                          alt={`${property.name} - Rumah ${property.size} perumahan bogor dramaga cantik residence dekat IPB`}
-                          className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-dark-luxury/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        <div className="absolute top-4 right-4 bg-gold text-white px-4 py-2 rounded-full font-semibold text-sm">
-                          {property.size}
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          plugins={[
+            Autoplay({
+              delay: 4000,
+            }),
+          ]}
+          className="w-full relative"
+        >
+          <CarouselContent className="-ml-4">
+            {propertyTypes.map((property, idx) => (
+              <CarouselItem key={idx} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <Card className="overflow-hidden h-full border-border hover:border-gold hover:shadow-gold-glow transition-all duration-300 group">
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={property.image}
+                        alt={`${property.name} - Rumah ${property.size} perumahan bogor dramaga cantik residence dekat IPB`}
+                        className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-dark-luxury/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute top-4 right-4 bg-gold text-white px-4 py-2 rounded-full font-semibold text-sm">
+                        {property.size}
+                      </div>
+                    </div>
+                    
+                    <CardHeader>
+                      <CardTitle className="text-2xl text-foreground flex items-center gap-2">
+                        <Home className="w-6 h-6 text-gold" />
+                        {property.name}
+                      </CardTitle>
+                    </CardHeader>
+
+                    <CardContent>
+                      <div className="text-2xl font-bold text-gold mb-4">{property.price}</div>
+                      <div className="flex gap-4 text-muted-foreground">
+                        <div className="flex items-center gap-1">
+                          <Bed className="w-4 h-4" />
+                          <span className="text-sm">{property.specs.bedrooms}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Bath className="w-4 h-4" />
+                          <span className="text-sm">{property.specs.bathrooms}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Car className="w-4 h-4" />
+                          <span className="text-sm">{property.specs.carport}</span>
                         </div>
                       </div>
-                      
-                      <CardHeader>
-                        <CardTitle className="text-2xl text-foreground flex items-center gap-2">
-                          <Home className="w-6 h-6 text-gold" />
-                          {property.name}
-                        </CardTitle>
-                      </CardHeader>
+                    </CardContent>
 
-                      <CardContent>
-                        <div className="text-2xl font-bold text-gold mb-4">{property.price}</div>
-                        <div className="flex gap-4 text-muted-foreground">
-                          <div className="flex items-center gap-1">
-                            <Bed className="w-4 h-4" />
-                            <span className="text-sm">{property.specs.bedrooms}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Bath className="w-4 h-4" />
-                            <span className="text-sm">{property.specs.bathrooms}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Car className="w-4 h-4" />
-                            <span className="text-sm">{property.specs.carport}</span>
-                          </div>
-                        </div>
-                      </CardContent>
-
-                      <CardFooter>
-                        <Button 
-                          variant="default"
-                          className="w-full"
-                          onClick={() => navigate(`/property/${property.slug}`)}
-                        >
-                          Lihat Detail
-                        </Button>
-                      </CardFooter>
-                    </Card>
-                  </motion.div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-          <CarouselPrevious className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 hidden lg:flex" />
-          <CarouselNext className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 hidden lg:flex" />
-        </div>
+                    <CardFooter>
+                      <Button 
+                        variant="default"
+                        className="w-full"
+                        onClick={() => navigate(`/property/${property.slug}`)}
+                      >
+                        Lihat Detail
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </motion.div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="hidden lg:block">
+            <CarouselPrevious className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16" />
+            <CarouselNext className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16" />
+          </div>
+        </Carousel>
       </div>
     </section>
   );
