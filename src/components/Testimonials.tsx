@@ -28,7 +28,7 @@ const testimonials = [
 
 export const Testimonials = () => {
   return (
-    <section className="py-20 bg-dark-luxury">
+    <section className="py-20">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -37,10 +37,10 @@ export const Testimonials = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Apa Kata <span className="text-gold">Mereka?</span>
           </h2>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Testimoni dari penghuni yang telah merasakan kenyamanan tinggal di cluster kami
           </p>
         </motion.div>
@@ -65,7 +65,7 @@ export const Testimonials = () => {
                     ))}
                   </div>
 
-                  <p className="text-gray-200 mb-6 leading-relaxed">
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
                     "{testimonial.content}"
                   </p>
 
@@ -76,7 +76,7 @@ export const Testimonials = () => {
                       className="w-12 h-12 rounded-full object-cover border-2 border-gold"
                     />
                     <div>
-                      <h4 className="text-white font-semibold">{testimonial.name}</h4>
+                      <h4 className="text-foreground font-semibold">{testimonial.name}</h4>
                       <p className="text-gold text-sm">{testimonial.role}</p>
                     </div>
                   </div>

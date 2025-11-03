@@ -12,7 +12,7 @@ const brandItems = [
 
 export const PremiumBrands = () => {
   return (
-    <section id="premium-brands" className="py-20 bg-gradient-to-b from-background to-secondary/30">
+    <section id="premium-brands" className="py-20">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

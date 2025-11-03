@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Home, Bed, Bath, Car, ChevronLeft, ChevronRight } from "lucide-react";
+import { Home, Bed, Bath, Car } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const propertyTypes = [
   {
@@ -50,47 +51,9 @@ const propertyTypes = [
 
 export const PropertyTypes = () => {
   const navigate = useNavigate();
-  const sliderRef = useRef<HTMLDivElement | null>(null);
-  const [index, setIndex] = useState(0);
-  const [cardWidth, setCardWidth] = useState(0);
-
-  // Hitung lebar kartu (termasuk gap) untuk scroll satu kartu per langkah
-  useEffect(() => {
-    const el = sliderRef.current;
-    if (!el) return;
-    const firstCard = el.querySelector('[data-card]') as HTMLElement | null;
-    if (firstCard) {
-      const gap = 24; // gap-6 = 24px
-      setCardWidth(firstCard.offsetWidth + gap);
-    }
-  }, []);
-
-  // Auto-slide
-  useEffect(() => {
-    const t = setInterval(() => {
-      handleNext();
-    }, 4000);
-    return () => clearInterval(t);
-  }, [cardWidth]);
-
-  const handlePrev = () => {
-    const el = sliderRef.current;
-    if (!el || !cardWidth) return;
-    const newIndex = (index - 1 + propertyTypes.length) % propertyTypes.length;
-    setIndex(newIndex);
-    el.scrollTo({ left: newIndex * cardWidth, behavior: 'smooth' });
-  };
-
-  const handleNext = () => {
-    const el = sliderRef.current;
-    if (!el || !cardWidth) return;
-    const newIndex = (index + 1) % propertyTypes.length;
-    setIndex(newIndex);
-    el.scrollTo({ left: newIndex * cardWidth, behavior: 'smooth' });
-  };
 
   return (
-    <section id="property-types" className="py-20 bg-secondary/30">
+    <section id="property-types" className="py-20">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -107,39 +70,27 @@ export const PropertyTypes = () => {
           </p>
         </motion.div>
 
-        <div className="relative">
-          {/* Arrows */}
-          <button
-            aria-label="Sebelumnya"
-            onClick={handlePrev}
-            className="absolute -left-2 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 text-white border border-white/30 rounded-full p-2 backdrop-blur-sm"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
-            aria-label="Berikutnya"
-            onClick={handleNext}
-            className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 text-white border border-white/30 rounded-full p-2 backdrop-blur-sm"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-
-          {/* Slider */}
-          <div
-            ref={sliderRef}
-            className="overflow-x-hidden"
-          >
-            <div className="flex gap-6">
-              {propertyTypes.map((property, idx) => (
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          plugins={[
+            Autoplay({
+              delay: 4000,
+            }),
+          ]}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-4">
+            {propertyTypes.map((property, idx) => (
+              <CarouselItem key={idx} className="pl-4 md:basis-1/2 lg:basis-1/3">
                 <motion.div
-                  key={idx}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   whileHover={{ scale: 1.02 }}
-                  className="min-w-[280px] sm:min-w-[320px] lg:min-w-[300px] xl:min-w-[320px]"
-                  data-card
                 >
                   <Card className="overflow-hidden h-full border-border hover:border-gold hover:shadow-gold-glow transition-all duration-300 group">
                     <div className="relative overflow-hidden">
@@ -181,7 +132,8 @@ export const PropertyTypes = () => {
 
                     <CardFooter>
                       <Button 
-                        className="w-full bg-gold hover:bg-gold/90 text-white transition-all duration-300 hover:shadow-gold-glow"
+                        variant="default"
+                        className="w-full"
                         onClick={() => navigate(`/property/${property.slug}`)}
                       >
                         Lihat Detail
@@ -189,10 +141,12 @@ export const PropertyTypes = () => {
                     </CardFooter>
                   </Card>
                 </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-0 -translate-x-12" />
+          <CarouselNext className="right-0 translate-x-12" />
+        </Carousel>
       </div>
     </section>
   );

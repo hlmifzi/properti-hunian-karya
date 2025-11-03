@@ -3,7 +3,7 @@ import { MapPin, Clock, Navigation } from "lucide-react";
 
 export const Location = () => {
   return (
-    <section id="location" className="py-20 bg-secondary/30">
+    <section id="location" className="py-20">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

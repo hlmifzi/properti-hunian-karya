@@ -26,18 +26,42 @@ const Index = () => {
         <div className="-mt-16">
           <Hero />
         </div>
-        <PropertyTypes />
-        <SoldStats />
-        <Features />
-        <Gallery />
-        <FacilitiesAccess />
-        <PremiumBrands />
-        <Testimonials />
-        <Location />
-        <SupportKPR />
-        <KPRSimulator />
-        <FAQAccordion />
-        <FinalCTA />
+        <div className="bg-background">
+          <PropertyTypes />
+        </div>
+        <div className="bg-secondary/30">
+          <SoldStats />
+        </div>
+        <div className="bg-background">
+          <Features />
+        </div>
+        <div className="bg-secondary/30">
+          <Gallery />
+        </div>
+        <div className="bg-background">
+          <FacilitiesAccess />
+        </div>
+        <div className="bg-secondary/30">
+          <PremiumBrands />
+        </div>
+        <div className="bg-background">
+          <Testimonials />
+        </div>
+        <div className="bg-secondary/30">
+          <Location />
+        </div>
+        <div className="bg-background">
+          <SupportKPR />
+        </div>
+        <div className="bg-secondary/30">
+          <KPRSimulator />
+        </div>
+        <div className="bg-background">
+          <FAQAccordion />
+        </div>
+        <div className="bg-secondary/30">
+          <FinalCTA />
+        </div>
         <Footer />
       </div>
       <FloatingWhatsApp />
