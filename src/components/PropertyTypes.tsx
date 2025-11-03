@@ -63,12 +63,10 @@ export const PropertyTypes = () => {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Perumahan Bogor - <span className="text-gold">Dramaga Cantik Residence</span>
+            Perumahan Bogor - <span className="text-gold">Dramaga Cantik Residence Bogor</span>
           </h1>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-            Cluster bogor terbaik dengan perumahan di bogor yang sejuk dekat IPB Dramaga. 
-            Pilihan perumahan murah di bogor mulai rumah harga 300 jutaan hingga perumahan elit di bogor. 
-            Hunian minimalis modern di perumahan dramaga bogor untuk keluarga Indonesia.
+            Perumahan dramaga bogor terbaik dengan perumahan di bogor yang sejuk. Cluster bogor perumahan dekat IPB dramaga dengan pilihan perumahan murah di bogor mulai rumah harga 300 jutaan. Tersedia rumah harga 300 juta minimalis hingga perumahan elit di bogor untuk keluarga Indonesia.
           </p>
         </motion.div>
 
